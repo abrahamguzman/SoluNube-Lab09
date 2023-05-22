@@ -1,0 +1,40 @@
+{% extends './base.html' %}
+{% block titulo %}
+    <title>Index</title>
+{% endblock %}
+{% block contenido %}
+    <!--
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit">Cargar</button>
+    </form>
+    -->
+    <a href="{{ url_for('crear') }}" class="btn btn-success my-2" id="addMovie">Agregar película</a>
+    <table class="table">
+        <thead class="table-head">
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Director</th>
+            <th scope="col">Año</th>
+            <th scope="col">Duración</th>
+            <th scope="col">Póster</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for key, value in datos.items() %}
+          <tr>
+            <th scope="row">{{ value.title }}</th>
+            <td>{{ value.director }}</td>
+            <td>{{ value.year }}</td>
+            <td>{{ value.duration }}</td>
+            <td><img src="https://{{bucket}}.s3.us-east-2.amazonaws.com/{{ value.img }}" alt="Imagen de S3" style="width: 100px;" class="imgTable"></td>
+            <td>
+              <a href="/eliminado/{{key}}/{{value.img}}" class="btn btn-danger">Eliminar</a>
+              <a href="/editar/{{key}}/{{value.img}}" class="btn btn-primary">Editar</a>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+{% endblock %}
