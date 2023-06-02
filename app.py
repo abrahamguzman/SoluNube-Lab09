@@ -69,7 +69,7 @@ def editado(id, img):
 @app.route('/eliminado/<id>/<img>')
 def eliminado(id, img):
     deleteMovie(id)
-    eliminarS3(img)
+    #eliminarS3(img)
     return redirect('/')
 
     
